@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Service History</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/service.css">
+</head>
+
+<body>
+<div class="brand"><b>VS</b> VEHICLE SERVICE <small>Management workspace</small></div>
+
+<div class="container">
+
+    <a href="/dashboard" class="back">← Back to Dashboard</a>
+
+    <h2>Service History Management</h2>
+
+    <form th:action="@{/service-history/save}"
+          th:object="${history}" method="post">
+
+        <input type="hidden" th:field="*{id}">
+
+        <label>Customer Name</label>
+        <input type="text" th:field="*{customerName}" required>
+
+        <label>Vehicle Number</label>
+        <input type="text" th:field="*{vehicleNumber}" required>
+
+        <label>Service Description</label>
+        <input type="text" th:field="*{serviceDescription}" required>
+
+        <label>Service Date</label>
+        <input type="date" th:field="*{serviceDate}" required>
+
+        <label>Amount (Rs.)</label>
+        <input type="number" step="0.01"
+               th:field="*{amount}" required>
+
+        <button type="submit"
+                th:text="${history.id == null ? 'Save Service History' : 'Update Service History'}">
+            Save Service History
+        </button>
+
+        <a th:if="${history.id != null}"
+           href="/service-history" class="cancel">
+            Cancel Edit
+        </a>
+
+    </form>
+
+    <h3>Previous Service Records</h3>
+
+    <div class="table-wrap"><table>
+
+        <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Vehicle</th>
+            <th>Service</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Actions</th>
+        </tr>
+
+        <tr th:each="h : ${histories}">
+
+            <td th:text="${h.id}"></td>
+            <td th:text="${h.customerName}"></td>
+            <td th:text="${h.vehicleNumber}"></td>
+            <td th:text="${h.serviceDescription}"></td>
+            <td th:text="${h.serviceDate}"></td>
+            <td th:text="${h.amount}"></td>
+
+            <td>
+                <a th:href="@{/service-history/edit/{id}(id=${h.id})}"
+                   class="edit">Edit</a>
+
+                <form th:action="@{/service-history/delete/{id}(id=${h.id})}"
+                      method="post"
+                      style="display:inline;"
+                      onsubmit="return confirm('Are you sure you want to delete this record?');">
+
+                    <button type="submit" class="delete"
+                            style="width:auto;">
+                        Delete
+                    </button>
+
+                </form>
+            </td>
+
+        </tr>
+
+    </table></div>
+
+</div>
+
+</body>
+</html>

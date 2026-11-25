@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Dashboard</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/service.css">
+</head>
+
+<body>
+<div class="brand"><b>VS</b> VEHICLE SERVICE <small>Management workspace</small></div>
+
+<div class="container">
+
+    <div class="hero"><span class="eyebrow">SERVICE OPERATIONS</span><h2>Vehicle Service Management System</h2><p>Manage vehicles, customers and workshop operations.</p></div>
+
+    <h3>Welcome, <span th:text="${username}"></span></h3>
+
+    <p>Role: <span th:text="${role}"></span></p>
+
+    <h3>System Modules</h3><div class="modules">
+
+    <a class="module" href="/customers"><span>👥</span><strong>Customer Management</strong><small>Open module →</small></a>
+    <a class="module" href="/vehicles"><span>🚘</span><strong>Vehicle Management</strong><small>Open module →</small></a>
+    <a class="module" href="/bookings"><span>📅</span><strong>Service Booking</strong><small>Open module →</small></a>
+    <a class="module" href="/spare-parts"><span>⚙</span><strong>Spare Parts Management</strong><small>Open module →</small></a>
+    <a class="module" href="/billing"><span>▤</span><strong>Billing and Payments</strong><small>Open module →</small></a>
+    <a class="module" href="/service-history"><span>🛠</span><strong>Service History</strong><small>Open module →</small></a>
+    <a class="module" href="/reports"><span>📊</span><strong>Reports</strong><small>Open module →</small></a>
+
+    </div><a href="/logout" class="logout">Logout</a>
+
+</div>
+
+</body>
+</html>

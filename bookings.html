@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Service Booking</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/service.css">
+</head>
+
+<body>
+<div class="brand"><b>VS</b> VEHICLE SERVICE <small>Management workspace</small></div>
+
+<div class="container">
+
+    <a href="/dashboard" class="back">← Back to Dashboard</a>
+
+    <h2>Service Booking</h2>
+
+    <form th:action="@{/bookings/save}"
+          th:object="${booking}" method="post">
+
+        <label>Customer Name</label>
+        <input type="text" th:field="*{customerName}" required>
+
+        <label>Vehicle Number</label>
+        <input type="text" th:field="*{vehicleNumber}" required>
+
+        <label>Service Type</label>
+        <select th:field="*{serviceType}" required>
+            <option value="">Select Service</option>
+            <option value="Full Service">Full Service</option>
+            <option value="Oil Change">Oil Change</option>
+            <option value="Engine Repair">Engine Repair</option>
+            <option value="Brake Service">Brake Service</option>
+        </select>
+
+        <label>Booking Date</label>
+        <input type="date" th:field="*{bookingDate}" required>
+
+        <button type="submit">Book Service</button>
+
+    </form>
+
+    <h3>Service Bookings</h3>
+
+    <div class="table-wrap"><table border="1" width="100%">
+
+        <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Vehicle</th>
+            <th>Service</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Update</th>
+        </tr>
+
+        <tr th:each="b : ${bookings}">
+            <td th:text="${b.id}"></td>
+            <td th:text="${b.customerName}"></td>
+            <td th:text="${b.vehicleNumber}"></td>
+            <td th:text="${b.serviceType}"></td>
+            <td th:text="${b.bookingDate}"></td>
+
+            <td th:text="${b.status}"></td>
+
+            <td>
+                <form th:action="@{/bookings/update}" method="post">
+
+                    <input type="hidden" name="id"
+                           th:value="${b.id}">
+
+                    <select name="status">
+                        <option value="Pending"
+                                th:selected="${b.status == 'Pending'}">
+                            Pending
+                        </option>
+
+                        <option value="In Progress"
+                                th:selected="${b.status == 'In Progress'}">
+                            In Progress
+                        </option>
+
+                        <option value="Completed"
+                                th:selected="${b.status == 'Completed'}">
+                            Completed
+                        </option>
+                    </select>
+
+                    <button type="submit">Update Status</button>
+
+                </form>
+            </td>
+        </tr>
+
+    </table></div>
+
+</div>
+
+</body>
+</html>

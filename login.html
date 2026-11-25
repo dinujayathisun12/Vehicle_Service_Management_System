@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Vehicle Service Login</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/service.css">
+
+</head>
+
+<body class="login-page">
+
+<div class="login-box">
+<span class="eyebrow">AUTO SERVICE / MANAGEMENT</span>
+
+    <h2>Vehicle Service System</h2>
+    <h3>Login</h3>
+
+    <form th:action="@{/login}" method="post">
+
+        <label>Username</label>
+        <input type="text" name="username" required>
+
+        <label>Password</label>
+        <input type="password" name="password" required>
+
+        <button type="submit">Login</button>
+
+    </form>
+
+    <p class="error" th:if="${error}" th:text="${error}"></p>
+
+</div>
+
+</body>
+</html>

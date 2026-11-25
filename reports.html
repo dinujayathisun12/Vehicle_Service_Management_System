@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>System Reports</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/service.css">
+
+</head>
+
+<body>
+<div class="brand"><b>VS</b> VEHICLE SERVICE <small>Management workspace</small></div>
+
+<div class="container">
+
+    <a href="/dashboard" class="back">← Back to Dashboard</a>
+
+    <h2>Vehicle Service Management Reports</h2>
+
+    <div class="report-card">
+        <h3>Total Customers</h3>
+        <div class="value" th:text="${totalCustomers}"></div>
+    </div>
+
+    <div class="report-card">
+        <h3>Total Vehicles</h3>
+        <div class="value" th:text="${totalVehicles}"></div>
+    </div>
+
+    <div class="report-card">
+        <h3>Total Service Bookings</h3>
+        <div class="value" th:text="${totalBookings}"></div>
+    </div>
+
+    <div class="report-card">
+        <h3>Total Spare Parts</h3>
+        <div class="value" th:text="${totalSpareParts}"></div>
+    </div>
+
+    <div class="report-card">
+        <h3>Total Bills</h3>
+        <div class="value" th:text="${totalBills}"></div>
+    </div>
+
+    <div class="report-card">
+        <h3>Total Service History Records</h3>
+        <div class="value" th:text="${totalHistory}"></div>
+    </div>
+
+    <div class="report-card">
+        <h3>Total Paid Income</h3>
+        <div class="value">
+            Rs. <span th:text="${totalIncome}"></span>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Vehicle Registration</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/service.css">
+</head>
+
+<body>
+<div class="brand"><b>VS</b> VEHICLE SERVICE <small>Management workspace</small></div>
+
+<div class="container">
+
+    <a href="/dashboard" class="back">← Back to Dashboard</a>
+
+    <h2>Vehicle Registration</h2>
+
+    <form th:action="@{/vehicles/save}"
+          th:object="${vehicle}" method="post">
+
+        <input type="hidden" th:field="*{id}">
+
+        <label>Vehicle Number</label>
+        <input type="text" th:field="*{vehicleNumber}" required>
+
+        <label>Brand</label>
+        <input type="text" th:field="*{brand}" required>
+
+        <label>Model</label>
+        <input type="text" th:field="*{model}" required>
+
+        <label>Year</label>
+        <input type="number" th:field="*{year}" required>
+
+        <button type="submit"
+                th:text="${vehicle.id == null ? 'Register Vehicle' : 'Update Vehicle'}">
+            Register Vehicle
+        </button>
+
+    </form>
+
+    <h3>Registered Vehicles</h3>
+
+    <div class="table-wrap"><table border="1" width="100%">
+
+        <tr>
+            <th>ID</th>
+            <th>Vehicle Number</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Actions</th>
+        </tr>
+
+        <tr th:each="v : ${vehicles}">
+
+            <td th:text="${v.id}"></td>
+            <td th:text="${v.vehicleNumber}"></td>
+            <td th:text="${v.brand}"></td>
+            <td th:text="${v.model}"></td>
+
+            <td>
+                <a th:href="@{/vehicles/edit/{id}(id=${v.id})}"
+                   class="edit">Edit</a>
+
+                <form th:action="@{/vehicles/delete/{id}(id=${v.id})}"
+                      method="post"
+                      class="delete-form"
+                      onsubmit="return confirm('Are you sure you want to delete this vehicle?');">
+
+                    <button type="submit" class="delete">
+                        Delete
+                    </button>
+
+                </form>
+            </td>
+
+        </tr>
+
+    </table></div>
+
+</div>
+
+</body>
+</html>
